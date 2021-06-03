@@ -3,6 +3,7 @@
 session_start();
 
 require_once("../DB_CFG/index.php");
+require_once("../Functions/is_valid_record.php");
 
 if(isset($_SESSION["uuid"])){
 
@@ -69,11 +70,74 @@ $stmt->execute();
 $stmt->store_result();  
 $stmt->bind_result($record_id, $date_from, $date_to, $designation, $status, $monthly_salary, $assignment_place, $LAWOP, $separation_date, $separation_cause);
 
+if(isset($_POST["INSERT"])){
+    $response = json_decode(is_valid_record(
+        $conn,
+        $_POST["date_from"],
+        $_POST["date_to"],
+        $_POST["designation"],
+        $_POST["status"],
+        $_POST["monthly_salary"],
+        $_POST["assignment_place"],
+        $_POST["LAWOP"],
+        $_POST["separation_date"],
+        $_POST["separation_cause"]
+    ), true);
+
+    if(!$response["is_valid"]){
+        $errors = $response["errors"];
+        echo "<center>";
+
+            for ($i=0; $i < count($errors); $i++) { 
+                echo "$errors[$i]<br>";
+            }
+
+        echo "<center>";
+    } else {
+        $stmt = $conn->prepare(
+        "INSERT INTO jobs
+        (
+        user,
+        date_from, 
+        date_to, 
+        designation, 
+        status, 
+        monthly_salary, 
+        assignment_place, 
+        LAWOP, 
+        separation_date, 
+        separation_cause
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+        $stmt->bind_param(
+        "ssssssssss",
+        $_SESSION["uuid"],
+        $_POST["date_from"],
+        $_POST["date_to"],
+        $_POST["designation"],
+        $_POST["status"],
+        $_POST["monthly_salary"],
+        $_POST["assignment_place"],
+        $_POST["LAWOP"],
+        $_POST["separation_date"],
+        $_POST["separation_cause"],
+    );
+
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+
+        header("location: ./");
+    }
+
+}
+
 echo "
 <html>
     <head>
         <title>Dashboard</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta name='viewport' content='width=device-width'>
         <style>
             td, th {
                 border: 1px solid #dddddd;
@@ -89,6 +153,36 @@ echo "
     <h1>Hello $FNAME  $MNAME $LNAME</h1>
     
     <center>
+
+    <form method='POST' action=''>
+<table>
+    <tr>
+        <th><center>From<br>(mm-dd-yyyy)</center></th>
+        <th><center>To<br>(mm-dd-yyyy)</center></th>
+        <th>Designation</th>
+        <th>Status</th>
+        <th>Monthly salary</th>
+        <th>Assignment place</th>
+        <th>LAWOP</th>
+        <th>Separation date (if any)</th>
+        <th>Separartion clause (if any)</th>
+    </tr>
+    <tr>
+        <td><textarea name='date_from' rows='2' cols='10'></textarea></td>
+        <td><textarea name='date_to' rows='2' cols='10'></textarea></td>
+        <td><textarea name='designation' rows='2' cols='10'></textarea></td>
+        <td><textarea name='status' rows='2' cols='10'></textarea></td>
+        <td><textarea name='monthly_salary' rows='2' cols='10'></textarea></td>
+        <td><textarea name='assignment_place' rows='2' cols='10'></textarea></td>
+        <td><textarea name='LAWOP' rows='2' cols='10'></textarea></td>
+        <td><textarea name='separation_date' rows='2' cols='10'></textarea></td>
+        <td><textarea name='separation_cause' rows='2' cols='10'></textarea></td>
+    </tr>
+
+</table>
+<input type='submit' value='INSERT NEW' name='INSERT'>
+</form>
+
 ";
 
 if ($stmt->num_rows <= 0) {
@@ -142,7 +236,6 @@ if ($stmt->num_rows <= 0) {
                 if($separation_date != "0000-00-00"){
                     echo explode("-", $separation_date)[1]."-".explode("-", $separation_date)[2]."-".explode("-", $separation_date)[0];
                 }
-                
                 echo"
                 </center></td>
                 <td>$separation_cause</td>
@@ -163,7 +256,8 @@ if ($stmt->num_rows <= 0) {
 }
 
 echo "
-<a href='./insert_record/'>INSERT NEW RECORD</a>
+<a href='./?sort=from_asc' style='margin-right: 1rem'>Sort by newest</a>
+<a href='./?sort=from_desc' style='margin-left: 1rem'>Sort by oldest</a>
 </center>
 </body>
 </html>
@@ -171,7 +265,6 @@ echo "
 
 $stmt->free_result();
 $stmt->close();
-$conn->close();
 
 } else {
     header("location: ../");
