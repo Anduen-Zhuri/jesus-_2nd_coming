@@ -4,6 +4,7 @@ session_start();
 
 require_once("../../DB_CFG/index.php");
 require_once("../../Functions/is_valid_record.php");
+require_once("../../Functions/Strings.php");
 
 if (isset($_SESSION["uuid"]) && isset($_GET["id"]) && !empty($_GET["id"])) {
 $stmt = $conn->prepare("SELECT 
@@ -62,15 +63,15 @@ echo "
                         <th>Separartion clause</th>
                     </tr>
                     <tr>
-                        <td><input type='date' name='date_from' value='$date_from'></td>
-                        <td><input type='date' name='date_to' value='$date_to'></td>
-                        <td><input type='text' name='designation' value='$designation'></td>
-                        <td><input type='text' name='status' value='$status'></td>
-                        <td><input type='text' name='monthly_salary' value='$monthly_salary'></td>
-                        <td><input type='text' name='assignment_place' value='$assignment_place'></td>
-                        <td><input type='text' name='LAWOP' value='$LAWOP'></td>
-                        <td><input type='date' name='separation_date' value='$separation_date'></td>
-                        <td><input type='text' name='separation_cause' value='$separation_cause'></td>
+                        <td><center><textarea name='date_from' rows='2' cols='10'>$date_from</textarea></center></td>
+                        <td><center><textarea name='date_to' rows='2' cols='10'>$date_to</textarea></center></td>
+                        <td><center><textarea name='designation' rows='2' cols='10'>$designation</textarea></center></td>
+                        <td><center><textarea name='status' rows='2' cols='10'>$status</textarea></center></td>
+                        <td><center><textarea name='monthly_salary' rows='2' cols='10'>$monthly_salary</textarea></center></td>
+                        <td><center><textarea name='assignment_place' rows='2' cols='10'>$assignment_place</textarea></center></td>
+                        <td><center><textarea name='LAWOP' rows='2' cols='10'>$LAWOP</textarea></center></td>
+                        <td><center><textarea name='separation_date' rows='2' cols='10'>$separation_date</textarea></center></td>
+                        <td><center><textarea name='separation_cause' rows='2' cols='10'>$separation_cause</textarea></center></td>
                     </tr>
 
                 </table>
@@ -89,6 +90,7 @@ echo "
 if(isset($_POST["UPDATE"])){
     $response = json_decode(is_valid_record(
         $conn,
+        $date_format,
         $_POST["date_from"],
         $_POST["date_to"],
         $_POST["designation"],
@@ -141,10 +143,7 @@ if(isset($_POST["UPDATE"])){
         $stmt->execute();
         $stmt->close();
 
-        echo "
-        <center>
-            SUCCESSFULLY UPDATED
-        <center>";
+        header("location: ../");
     }
 
 }

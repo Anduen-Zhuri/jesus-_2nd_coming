@@ -4,6 +4,7 @@ session_start();
 
 require_once("../DB_CFG/index.php");
 require_once("../Functions/is_valid_record.php");
+require_once("../Functions/Strings.php");
 
 if(isset($_SESSION["uuid"])){
 
@@ -73,6 +74,7 @@ $stmt->bind_result($record_id, $date_from, $date_to, $designation, $status, $mon
 if(isset($_POST["INSERT"])){
     $response = json_decode(is_valid_record(
         $conn,
+        $date_format,
         $_POST["date_from"],
         $_POST["date_to"],
         $_POST["designation"],
@@ -159,24 +161,24 @@ echo "
     <tr>
         <th><center>From<br>(mm-dd-yyyy)</center></th>
         <th><center>To<br>(mm-dd-yyyy)</center></th>
-        <th>Designation</th>
-        <th>Status</th>
-        <th>Monthly salary</th>
-        <th>Assignment place</th>
-        <th>LAWOP</th>
-        <th>Separation date (if any)</th>
-        <th>Separartion clause (if any)</th>
+        <th><center>Designation</center></th>
+        <th><center>Status</center></th>
+        <th><center>Monthly salary</center></th>
+        <th><center>Assignment place</center></th>
+        <th><center>LAWOP</center></th>
+        <th><center>Separation date<br>(if any)</center></th>
+        <th><center>Separation clause<br>(if any)</center></th>
     </tr>
     <tr>
-        <td><textarea name='date_from' rows='2' cols='10'></textarea></td>
-        <td><textarea name='date_to' rows='2' cols='10'></textarea></td>
-        <td><textarea name='designation' rows='2' cols='10'></textarea></td>
-        <td><textarea name='status' rows='2' cols='10'></textarea></td>
-        <td><textarea name='monthly_salary' rows='2' cols='10'></textarea></td>
-        <td><textarea name='assignment_place' rows='2' cols='10'></textarea></td>
-        <td><textarea name='LAWOP' rows='2' cols='10'></textarea></td>
-        <td><textarea name='separation_date' rows='2' cols='10'></textarea></td>
-        <td><textarea name='separation_cause' rows='2' cols='10'></textarea></td>
+        <td><center><textarea name='date_from' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='date_to' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='designation' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='status' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='monthly_salary' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='assignment_place' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='LAWOP' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='separation_date' rows='2' cols='10'></textarea></center></td>
+        <td><center><textarea name='separation_cause' rows='2' cols='10'></textarea></center></td>
     </tr>
 
 </table>
@@ -217,7 +219,7 @@ if ($stmt->num_rows <= 0) {
             <th>Assignment place</th>
             <th>LAWOP</th>
             <th>Separation date</th>
-            <th>Separartion clause</th>
+            <th>Separation clause</th>
             <th>Edit</th>
             <th>Remove</th>
         </tr>
@@ -225,20 +227,43 @@ if ($stmt->num_rows <= 0) {
         while ($stmt->fetch()) {
             echo "
             <tr>
-                <td>".explode("-", $date_from)[1]."-".explode("-", $date_from)[2]."-".explode("-", $date_from)[0]."</td>
-                <td>".explode("-", $date_to)[1]."-".explode("-", $date_to)[2]."-".explode("-", $date_to)[0]."</td>
+                <td>"; 
+                if(preg_match($date_format, $date_from)){
+                    echo $date_from;
+                } else {
+                    echo "<center>-</center>";
+                }
+                echo "
+                </td>
+                <td>";
+                if(preg_match($date_format, $date_to)){
+                    echo $date_to;
+                } else {
+                    echo "<center>-</center>";
+                }
+                echo"
+                </td>
                 <td>$designation</td>
                 <td>$status</td>
                 <td>$monthly_salary</td>
                 <td>$assignment_place</td>
                 <td>$LAWOP</td>
-                <td><center>";
-                if($separation_date != "0000-00-00"){
-                    echo explode("-", $separation_date)[1]."-".explode("-", $separation_date)[2]."-".explode("-", $separation_date)[0];
+                <td>";
+                if(!empty($separation_date) && preg_match($date_format, $separation_date)){
+                    echo $separation_date;
+                } else {
+                    echo "<center>-</center>";
                 }
                 echo"
-                </center></td>
-                <td>$separation_cause</td>
+                </td>
+                <td>";
+                if(!empty($separation_cause)){
+                    echo $separation_cause;
+                } else {
+                    echo "<center>-</center>";
+                }
+                echo"
+                </td>
                 <td valign='center'><center>
                     <a href='./edit_record/?id=$record_id'>
                         <img src='../Img/edit.png' style='width: 2rem; height: 2rem;'>
