@@ -2,7 +2,7 @@
 
 require_once("../Functions/generate_uuid.php");
 
-function is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $PWD, $BDAY, $BPLACE){
+function is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE){
     $errors = array();
 
     if(empty($FNAME)){
@@ -21,9 +21,13 @@ function is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $PWD, $BDAY, $BPLA
         array_push($errors, "* Last name is too long");
     }
     
+    if(empty($EMAIL)){
+        array_push($errors, "* Email is empty");
+    }
+    
     if(empty($PWD)){
         array_push($errors, "* Password is empty");
-    } else if (strlen($LNAME) <= 6){
+    } else if (strlen($PWD) <= 6){
         array_push($errors, "* Password is too short");
     }
 
@@ -59,8 +63,8 @@ if ($stmt->num_rows > 0) {
 $UUID = generate_uuid();
 $PWD = md5($PWD);
 
-$stmt = $conn->prepare("INSERT INTO users (uuid, first_name, middle_name, last_name, birth_day, birth_place, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssss", $UUID, $FNAME, $MNAME, $LNAME, $BDAY, $BPLACE, $PWD);
+$stmt = $conn->prepare("INSERT INTO users (uuid, first_name, middle_name, last_name, birth_day, birth_place, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $UUID, $FNAME, $MNAME, $LNAME, $BDAY, $BPLACE, $EMAIL, $PWD);
 $stmt->execute();
 $stmt->free_result();
 $stmt->close();

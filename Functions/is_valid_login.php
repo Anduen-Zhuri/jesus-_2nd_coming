@@ -1,23 +1,11 @@
 <?php
 
-function is_valid_login($conn, $FNAME, $LNAME, $PWD){
+function is_valid_login($conn, $EMAIL, $PWD){
 
     $errors = array();
 
-    if(empty($FNAME)){
-        array_push($errors, "* First name is empty");
-    } else if (strlen($FNAME) <= 3){
-        array_push($errors, "* First name is too short");
-    } else if (strlen($FNAME) > 16){
-        array_push($errors, "* First name is too long");
-    }
-    
-    if(empty($LNAME)){
-        array_push($errors, "* Last name is empty");
-    } else if (strlen($LNAME) <= 3){
-        array_push($errors, "* Last name is too short");
-    } else if (strlen($LNAME) > 16){
-        array_push($errors, "* Last name is too long");
+    if(empty($EMAIL)){
+        array_push($errors, "* Email is empty");
     }
 
     if(!empty($errors)){
@@ -29,8 +17,8 @@ function is_valid_login($conn, $FNAME, $LNAME, $PWD){
 
 
 
-$stmt = $conn->prepare("SELECT uuid, password FROM users WHERE first_name=? AND last_name=?");
-$stmt->bind_param("ss", $FNAME, $LNAME);
+$stmt = $conn->prepare("SELECT uuid, password FROM users WHERE email=?");
+$stmt->bind_param("s", $EMAIL);
 $stmt->execute();
 $stmt->store_result();  
 

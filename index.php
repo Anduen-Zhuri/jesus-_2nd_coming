@@ -18,12 +18,8 @@ echo "
     <body>
         <center>
             <form method='POST' action=''>
-                <label for='Firstname'>First name:</label><br>
-                <input type='text' id='Firstname' name='Firstname' autocomplete='cc-firstname'>
-                <br>
-                
-                <label for='Lastname'>Last name:</label><br>
-                <input type='text' id='Lastname' name='Lastname' autocomplete='cc-firstname'>
+                <label for='Email'>Email:</label><br>
+                <input type='text' id='Email' name='Email' autocomplete='cc-email'>
                 <br>
 
                 <label for='Password'>Password:</label><br>
@@ -39,11 +35,10 @@ echo "
 }
 
 if(isset($_POST["LOGIN"])){
-    $FNAME = $_POST["Firstname"];
-    $LNAME = $_POST["Lastname"];
+    $EMAIL = $_POST["Email"];
     $PWD = $_POST["Password"];
 
-    $response = json_decode(is_valid_login($conn, $FNAME, $LNAME, md5($PWD)), true);
+    $response = json_decode(is_valid_login($conn, $EMAIL, md5($PWD)), true);
 
      if(!$response["is_valid"]){
         $errors = $response["errors"];

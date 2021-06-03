@@ -28,6 +28,10 @@ echo "
                 
                 <label for='Lastname'>Last name:</label><br>
                 <input type='text' id='Lastname' name='Lastname' autocomplete='cc-Lastname'>
+                <br>
+                
+                <label for='Email'>Email:</label><br>
+                <input type='email' id='Email' name='Email' autocomplete='cc-Email'>
                 <br>      
 
                 <label for='Password'>Password:</label><br>
@@ -55,11 +59,12 @@ if (isset($_POST["REGISTER"])) {
     $FNAME = $_POST["Firstname"];
     $MNAME = $_POST["Middlename"];
     $LNAME = $_POST["Lastname"];
+    $EMAIL = $_POST["Email"];
     $PWD = $_POST["Password"];
     $BDAY = $_POST["Birthday"];
     $BPLACE = $_POST["Birthplace"];
 
-    $response = json_decode(is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $PWD, $BDAY, $BPLACE), true);
+    $response = json_decode(is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE), true);
 
         if(!$response["is_valid"]){
             $errors = $response["errors"];
