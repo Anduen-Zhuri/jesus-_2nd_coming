@@ -135,6 +135,11 @@ if(isset($_POST["INSERT"])){
 
 }
 
+if (isset($_POST["LOGOUT"])) {
+    unset($_SESSION["uuid"]);
+    header("Location: ../");
+}
+
 echo "
 <html>
     <head>
@@ -283,6 +288,11 @@ if ($stmt->num_rows <= 0) {
 echo "
 <a href='./?sort=from_asc' style='margin-right: 1rem'>Sort by newest</a>
 <a href='./?sort=from_desc' style='margin-left: 1rem'>Sort by oldest</a>
+<br>
+<br>
+<form action='' method='POST'>
+<input type='submit' name='LOGOUT' value='LOG OUT'>
+</form>
 </center>
 </body>
 </html>
