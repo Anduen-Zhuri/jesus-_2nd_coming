@@ -41,24 +41,14 @@ $to_asc_img = "asc.png";
 
 if (isset($_GET["sort"])) {
     switch ($_GET["sort"]) {
-        case "from_desc":
-            $query .= " ORDER BY date_from DESC";
+        case "oldest":
+            $query .= " ORDER BY STR_TO_DATE(date_from, '%m-%d-%Y') ASC";
             $from_desc_img = "desc_active.png";
             break;
         
-        case "from_asc":
-            $query .= " ORDER BY date_from ASC";
+        case "newest":
+            $query .= " ORDER BY STR_TO_DATE(date_from, '%m-%d-%Y') DESC";
             $from_asc_img = "asc_active.png";
-            break;
-            
-        case "to_desc":
-            $query .= " ORDER BY date_to DESC";
-            $to_desc_img = "desc_active.png";
-            break;
-        
-        case "to_asc":
-            $query .= " ORDER BY date_to ASC";
-            $to_asc_img = "asc_active.png";
             break;
     }
 }
@@ -202,22 +192,13 @@ if ($stmt->num_rows <= 0) {
                 <div style='display: flex; justify-content: center; align-items: center;'>
                     <div style='flex: 0 0 75%;'>From</div>
                     <div style='flex: 1;'>
-                        <a href='./?sort=from_asc'><img src='../Img/$from_asc_img' width='15' height='15'></a>
-                        <a href='./?sort=from_desc'><img src='../Img/$from_desc_img' width='15' height='15'></a>
+                        <a href='./?sort=newest'><img src='../Img/$from_asc_img' width='15' height='15'></a>
+                        <a href='./?sort=oldest'><img src='../Img/$from_desc_img' width='15' height='15'></a>
                     </div>
                 </div>
             </th>
 
-            <th>
-                <div style='display: flex; justify-content: center; align-items: center;'>
-                    <div style='flex: 0 0 75%;'>To</div>
-                    <div style='flex: 1;'>
-                    <a href='./?sort=to_asc'><img src='../Img/$to_asc_img' width='15' height='15'></a>
-                    <a href='./?sort=to_desc'><img src='../Img/$to_desc_img' width='15' height='15'></a>
-                    </div>
-                </div>
-            </th>
-            
+            <th>To</th>
             <th>Designation</th>
             <th>Status</th>
             <th>Monthly salary</th>
@@ -286,8 +267,8 @@ if ($stmt->num_rows <= 0) {
 }
 
 echo "
-<a href='./?sort=from_asc' style='margin-right: 1rem'>Sort by newest</a>
-<a href='./?sort=from_desc' style='margin-left: 1rem'>Sort by oldest</a>
+<a href='./?sort=newest' style='margin-right: 1rem'>Sort by newest</a>
+<a href='./?sort=oldest' style='margin-left: 1rem'>Sort by oldest</a>
 <br>
 <br>
 <form action='' method='POST'>
