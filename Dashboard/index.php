@@ -148,6 +148,9 @@ echo "
     </head>
     <body>
     <h1>Hello $FNAME  $MNAME $LNAME</h1>
+    <a href='./edit_profile/'>[EDIT PROFILE]</a>
+    <br>
+    <br>
     
     <center>
 
@@ -177,7 +180,7 @@ echo "
     </tr>
 
 </table>
-<input type='submit' value='INSERT NEW' name='INSERT'>
+<input type='submit' value='INSERT NEW RECORD' name='INSERT'>
 </form>
 
 ";
@@ -188,16 +191,7 @@ if ($stmt->num_rows <= 0) {
     echo "<table>";
         echo "
         <tr>
-            <th>
-                <div style='display: flex; justify-content: center; align-items: center;'>
-                    <div style='flex: 0 0 75%;'>From</div>
-                    <div style='flex: 1;'>
-                        <a href='./?sort=newest'><img src='../Img/$from_asc_img' width='15' height='15'></a>
-                        <a href='./?sort=oldest'><img src='../Img/$from_desc_img' width='15' height='15'></a>
-                    </div>
-                </div>
-            </th>
-
+            <th>From</th>
             <th>To</th>
             <th>Designation</th>
             <th>Status</th>

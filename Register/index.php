@@ -4,6 +4,8 @@ session_start();
 
 require_once("../DB_CFG/index.php");
 require_once("../Functions/is_valid_registration.php");
+require_once("../Functions/generate_uuid.php");
+require_once("../Functions/Strings.php");
 
 if(isset($_SESSION["uuid"])){
     header("location: ../Dashboard/");
@@ -38,8 +40,8 @@ echo "
                 <input type='password' id='Password' name='Password' autocomplete='cc-Password'>
                 <br>
                 
-                <label for='Birthday'>Birthday:</label><br>
-                <input type='date' id='Birthday' name='Birthday' autocomplete='cc-Birthday'>
+                <label for='Birthday'>Birthday(mm-dd-yyyy):</label><br>
+                <input type='text' id='Birthday' name='Birthday' autocomplete='cc-Birthday'>
                 <br>
                 
                 <label for='Birthplace'>Birth place:</label><br>
@@ -64,9 +66,27 @@ if (isset($_POST["REGISTER"])) {
     $BDAY = $_POST["Birthday"];
     $BPLACE = $_POST["Birthplace"];
 
-    $response = json_decode(is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE), true);
+    $response = json_decode(is_valid_registration($conn, $date_format, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE), true);
 
-        if(!$response["is_valid"]){
+        if($response["is_valid"] && !$response["user_exists"]){
+            $UUID = generate_uuid();
+            $PWD = md5($PWD);
+
+            $stmt = $conn->prepare("INSERT INTO users (uuid, first_name, middle_name, last_name, birth_day, birth_place, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssss", $UUID, $FNAME, $MNAME, $LNAME, $BDAY, $BPLACE, $EMAIL, $PWD);
+            $stmt->execute();
+            $stmt->free_result();
+            $stmt->close();
+            $conn->close();
+
+
+            $_SESSION["uuid"] = $UUID;
+            header("location: ../Dashboard/");
+        } else if($response["user_exists"]){
+
+            echo ("<center><br>* This user is already taken</center>");
+
+        } else {
             $errors = $response["errors"];
             echo "<center>";
 
@@ -75,10 +95,7 @@ if (isset($_POST["REGISTER"])) {
             }
 
             echo "<center>";
-        } else {
-            $_SESSION["uuid"] = $response["uuid"];
-            header("location: ../Dashboard/");
-        }
+        } 
 }
 
 ?>

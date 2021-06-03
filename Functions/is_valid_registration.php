@@ -1,8 +1,6 @@
 <?php
 
-require_once("../Functions/generate_uuid.php");
-
-function is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE){
+function is_valid_registration($conn, $date_format, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDAY, $BPLACE){
     $errors = array();
 
     if(empty($FNAME)){
@@ -31,10 +29,12 @@ function is_valid_registration($conn, $FNAME, $MNAME, $LNAME, $EMAIL, $PWD, $BDA
         array_push($errors, "* Password is too short");
     }
 
-    if(empty($BDAY)){
+    if (empty($BDAY)) {
         array_push($errors, "* You need to set a birth date");
+    } else if(!preg_match($date_format, $BDAY)){
+        array_push($errors, "* Wrong date format on Birthday field(must be mm-dd-yyyy)");
     }
-
+    
     if(empty($BPLACE)){
         array_push($errors, "* Birth place cant be empty");
     }
@@ -53,27 +53,10 @@ $stmt->execute();
 $stmt->store_result();  
 
 if ($stmt->num_rows > 0) {
-    $response["is_valid"] = false;
-    array_push($errors, "* This user is already taken");
-    $response["errors"] = $errors;
-
-    return json_encode($response);
+    $response["user_exists"] = true;
 }
 
-$UUID = generate_uuid();
-$PWD = md5($PWD);
-
-$stmt = $conn->prepare("INSERT INTO users (uuid, first_name, middle_name, last_name, birth_day, birth_place, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssss", $UUID, $FNAME, $MNAME, $LNAME, $BDAY, $BPLACE, $EMAIL, $PWD);
-$stmt->execute();
-$stmt->free_result();
-$stmt->close();
-$conn->close();
-
-
-
 $response["is_valid"] = true;
-$response["uuid"] = $UUID;
 return json_encode($response);
 
 }
