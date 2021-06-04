@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 12:26 AM
+-- Generation Time: Jun 04, 2021 at 01:33 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -46,8 +46,7 @@ CREATE TABLE `jobs` (
 --
 
 INSERT INTO `jobs` (`id`, `user`, `date_from`, `date_to`, `designation`, `status`, `monthly_salary`, `assignment_place`, `LAWOP`, `separation_date`, `separation_cause`) VALUES
-(36, '26aa1a10-979c-4e0d-bab1-f7e3ff97e01f', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '', ''),
-(37, '37c73afa-8482-4e5d-8f73-f5dfd54bac53', '05-12-2003', '05-12-2003', '05-05-2005', '05-05-2005', '05-05-2005', '05-05-2005', '05-05-2005', '05-05-2005', '05-05-2005'),
+(36, '37c73afa-8482-4e5d-8f73-f5dfd54bac53', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '05-12-2002', '', ''),
 (38, '26aa1a10-979c-4e0d-bab1-f7e3ff97e01f', '05-12-2003', '0000-00-00', '05-12-1999', '05-12-1999', '05-12-1999', '05-12-1999', '05-12-1999', '05-12-1999', '05-12-1999');
 
 -- --------------------------------------------------------
@@ -65,18 +64,19 @@ CREATE TABLE `users` (
   `birth_day` varchar(999) NOT NULL,
   `birth_place` varchar(99) NOT NULL,
   `email` varchar(999) NOT NULL,
-  `password` varchar(99) NOT NULL
+  `password` varchar(99) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `first_name`, `middle_name`, `last_name`, `birth_day`, `birth_place`, `email`, `password`) VALUES
-(8, '26aa1a10-979c-4e0d-bab1-f7e3ff97e01f', 'testtest', '', 'testtest', '12-22-2002', 'testtest', 'andueni15@gmail.com', '05a671c66aefea124cc08b76ea6d30bb'),
-(10, '37c73afa-8482-4e5d-8f73-f5dfd54bac53', 'Anduen', 'Eni', 'Zhuri', '2021-06-16', 'srysrysysry', 'andueni15@gmail.com', '1fdbca81bfaa7f800a07b1fcdd5fcca1'),
-(11, 'd6a51066-45a8-4a5d-8660-70f9c6fcdc33', 'xhxjdj', 'cjcjcj', 'cjcjcjctj', '2021-06-16', 'cjctjcjcj', 'ccjctjctjctj@gmail.com', '8657f9f98aec8cbd01deb9eea2bfa1a3'),
-(12, '4e32cea3-b9d3-41f5-95f4-22470e5be9c2', 'gcjcgjgcjc', 'gcjcgjcj', 'hcghjcghcgj', '12-22-2002', 'cgjcgjcgj', 'fxhxfhxfh@jcghcxh', '739dddf3b42740a00eb24424809bce98');
+INSERT INTO `users` (`id`, `uuid`, `first_name`, `middle_name`, `last_name`, `birth_day`, `birth_place`, `email`, `password`, `is_admin`) VALUES
+(8, '26aa1a10-979c-4e0d-bab1-f7e3ff97e01f', 'testtest', '', 'testtest', '12-22-2002', 'testtest', 'andueni15@gmail.com', '05a671c66aefea124cc08b76ea6d30bb', 1),
+(10, '37c73afa-8482-4e5d-8f73-f5dfd54bac53', 'Anduen', 'Eni', 'Zhuri', '2021-06-16', 'srysrysysry', 'andueni15@gmail.com', '1fdbca81bfaa7f800a07b1fcdd5fcca1', 0),
+(11, 'd6a51066-45a8-4a5d-8660-70f9c6fcdc33', 'xhxjdj', 'cjcjcj', 'cjcjcjctj', '2021-06-16', 'cjctjcjcj', 'ccjctjctjctj@gmail.com', '8657f9f98aec8cbd01deb9eea2bfa1a3', 0),
+(12, '4e32cea3-b9d3-41f5-95f4-22470e5be9c2', 'gcjcgjgcjc', 'gcjcgjcj', 'hcghjcghcgj', '12-22-2002', 'cgjcgjcgj', 'fxhxfhxfh@jcghcxh', '739dddf3b42740a00eb24424809bce98', 0);
 
 --
 -- Indexes for dumped tables

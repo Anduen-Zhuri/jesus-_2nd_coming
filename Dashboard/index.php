@@ -8,11 +8,11 @@ require_once("../Functions/Strings.php");
 
 if(isset($_SESSION["uuid"])){
 
-$stmt = $conn->prepare("SELECT first_name, middle_name, last_name FROM users WHERE uuid=?");
+$stmt = $conn->prepare("SELECT first_name, middle_name, last_name, is_admin FROM users WHERE uuid=?");
 $stmt->bind_param("s", $_SESSION["uuid"]);
 $stmt->execute();
 $stmt->store_result();
-$stmt->bind_result($FNAME, $MNAME, $LNAME);
+$stmt->bind_result($FNAME, $MNAME, $LNAME, $is_admin);
 $stmt->fetch();
 
 if ($stmt->num_rows <= 0) {
@@ -149,6 +149,11 @@ echo "
     <body>
     <h1>Hello $FNAME  $MNAME $LNAME</h1>
     <a href='./edit_profile/'>[EDIT PROFILE]</a>
+    ";
+    if ($is_admin) {
+        echo ("<br><a href='./admin_room/'>[ADMIN ROOM]</a><br>");
+    }
+    echo"
     <br>
     <br>
     
