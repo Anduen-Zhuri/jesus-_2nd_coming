@@ -1,9 +1,4 @@
-<html>
-    <head>
-        <title>Index</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    </head>
-    <body>
+<?php include('./Layout/header.php');?>
         <center>
             <form method='POST' action=''>
                 <label for='Email'>Email:</label><br>
@@ -13,9 +8,14 @@
                 <label for='Password'>Password:</label><br>
                 <input type='password' id='Password' name='Password' autocomplete='cc-password'>
                 <br><br>
+                <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+                
                 <input type='submit' value='LOGIN' name='LOGIN'>
             </form>
             <a href='./Register/'>REGISTER</a>
         </center>
-    </body>
-</html>
+
+<?php include('./Layout/footer.php');?>
