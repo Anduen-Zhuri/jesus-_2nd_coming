@@ -154,6 +154,7 @@ echo "
         echo ("<br><a href='./admin_room/'>[ADMIN ROOM]</a><br>");
     }
     echo"
+    <br><a href='./personal_information/'>[personal_information]</a><br>
     <br>
     <br>
     
@@ -162,8 +163,8 @@ echo "
     <form method='POST' action=''>
 <table>
     <tr>
-        <th><center>From<br>(mm-dd-yyyy)</center></th>
-        <th><center>To<br>(mm-dd-yyyy)</center></th>
+        <th><center>From<br>(mm/dd/yyyy)</center></th>
+        <th><center>To<br>(mm/dd/yyyy)</center></th>
         <th><center>Designation</center></th>
         <th><center>Status</center></th>
         <th><center>Monthly salary</center></th>

@@ -32,7 +32,7 @@ function is_valid_registration($conn, $date_format, $FNAME, $MNAME, $LNAME, $EMA
     if (empty($BDAY)) {
         array_push($errors, "* You need to set a birth date");
     } else if(!preg_match($date_format, $BDAY)){
-        array_push($errors, "* Wrong date format on Birthday field(must be mm-dd-yyyy)");
+        array_push($errors, "* Wrong date format on Birthday field(must be mm/dd/yyyy)");
     }
     
     if(empty($BPLACE)){

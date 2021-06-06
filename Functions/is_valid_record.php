@@ -18,13 +18,13 @@ function is_valid_record(
     if (empty($date_from)) {
         array_push($errors, "* You need to set a starting date");
     } else if(!preg_match($date_format, $date_from)){
-        array_push($errors, "* Wrong date format on From field(must be mm-dd-yyyy)");
+        array_push($errors, "* Wrong date format on From field(must be mm/dd/yyyy)");
     }
     
     if (empty($date_to)) {
         array_push($errors, "* You need to set an ending date");
     } else if(!preg_match($date_format, $date_to)){
-        array_push($errors, "* Wrong date format on To field(must be mm-dd-yyyy)");
+        array_push($errors, "* Wrong date format on To field(must be mm/dd/yyyy)");
     }
     
     if (empty($designation)) {
@@ -48,7 +48,7 @@ function is_valid_record(
     }
     
     if (!empty($separation_date) && !preg_match($date_format, $separation_date)) {
-        array_push($errors, "* Wrong date format on Separation date field(must be mm-dd-yyyy)");
+        array_push($errors, "* Wrong date format on Separation date field(must be mm/dd/yyyy)");
     }
 
     if (!empty($errors)) {

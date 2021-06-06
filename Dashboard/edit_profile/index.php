@@ -44,7 +44,7 @@ echo "
                 <input type='text' id='Lastname' name='Lastname' autocomplete='cc-Lastname' value='$LNAME'>
                 <br>
                 
-                <label for='Birthday'>Birthday(mm-dd-yyyy)</label><br>
+                <label for='Birthday'>Birthday(mm/dd/yyyy)</label><br>
                 <input type='text' id='Birthday' name='Birthday' autocomplete='cc-Birthday' value='$BDAY'>
                 <br>
                 

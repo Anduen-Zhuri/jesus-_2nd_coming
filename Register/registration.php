@@ -23,7 +23,7 @@
                 <input type='password' id='Password' name='Password' autocomplete='cc-Password'>
                
                 
-                <label for='Birthday'>Birthday(mm-dd-yyyy):</label><br>
+                <label for='Birthday'>Birthday(mm/dd/yyyy):</label><br>
                 <input type='text' id='Birthday' name='Birthday' autocomplete='cc-Birthday'>
               
                 

@@ -59,6 +59,7 @@ $stmt->store_result();
 $stmt->bind_result($uuid, $FNAME, $MNAME, $LNAME);
 
 $SEARCH_VIEW = "
+    <a href='../'>&#8592; DASHBOARD</a>
     <h1>List of users:</h1>
     <form action='' method='POST'>
     <label for='first_name'>First name:</label><br>
