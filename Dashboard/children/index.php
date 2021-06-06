@@ -98,7 +98,7 @@ if(isset($_POST["REMOVE"])){
 <?php
 
 if ($stmt->num_rows <= 0) {
-    echo "<h3>Your have no children this far</h3>";
+    echo "<h3>You have no children this far</h3>";
 } else {
     echo "
         <table style='width: fit-content'>

@@ -18,12 +18,12 @@ function sql_insert($conn, $table_name, $sql_fields, $sql_values){
     ";    
 
 
-    $stmt = $conn->prepare($query);
+    $stmt = $conn->prepare($query) or die('prepare() failed: ' . htmlspecialchars($conn->error));
     $stmt_bind = $stmt->bind_param(str_repeat("s", count($sql_fields)), ...$sql_values);
     $stmt_exec = $stmt->execute();
     
     $response["is_valid"] = true;
-
+    //die(json_encode($sql_values, true));
     return $response;
 }
 

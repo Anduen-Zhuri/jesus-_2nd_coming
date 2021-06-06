@@ -155,6 +155,8 @@ echo "
     }
     echo"
     <br><a href='./personal_information/'>[personal_information]</a><br>
+    <a href='./children/'>[children]</a><br>
+    <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a><br>
     <br>
     <br>
     
