@@ -232,10 +232,9 @@ if(isset($_POST["SUBMIT"])){
 <?php
 
 for ($i=0; $i < count($fields); $i++) { 
-    eval('$value = $F_'.$i.';');
     echo ("
         <label for='field_$i'>$fields[$i]:</label><br>
-        <input type='text' id='field_$i' value='$value' name='field_$i'><br>
+        <input type='text' id='field_$i' name='field_$i'><br>
     ");
 }
 
@@ -244,6 +243,5 @@ for ($i=0; $i < count($fields); $i++) {
 <input type='submit' name='SUBMIT' value='SUBMIT'>
 </form>
 </center>
-<script src='./index.js'></script>
 
 <?php include('../../Layout/footer.php');?>

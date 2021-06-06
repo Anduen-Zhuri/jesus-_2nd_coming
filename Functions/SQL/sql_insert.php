@@ -7,7 +7,7 @@ function sql_insert($conn, $table_name, $sql_fields, $sql_values){
     $sql_values = array_values($sql_values);
 
     $query = "
-    INSERT INTO personal_information 
+    INSERT INTO $table_name 
     (
         ".implode(", ", $sql_fields)."
     )

@@ -2,12 +2,11 @@
 session_start();
 include('../../Layout/header.php');
 require_once("../../DB_CFG/index.php");
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $errors = array(); 
 
-if(!isset($_SESSION["uuid"]) || !isset($_GET["request"]) || !$_GET["request"]){
-    array_push("* Not logged in", $errors);
+if(!isset($_SESSION["uuid"])){
+    header("Locarion: ../");
 } else {
 
 $stmt = $conn->prepare("SELECT user_uuid FROM personal_information WHERE user_uuid=?");
