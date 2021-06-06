@@ -159,6 +159,8 @@ echo "
     <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a><br>
     <a href='./education/'>[education]</a><br>
     <a href='./learning_and_development/'>[learning_and_development]</a><br>
+    <a href='./questions/'>[questions]</a><br>
+    <a href='./refference/'>[refference]</a><br>
     <br>
     <br>
     
