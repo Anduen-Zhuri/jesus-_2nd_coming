@@ -157,6 +157,8 @@ echo "
     <br><a href='./personal_information/'>[personal_information]</a><br>
     <a href='./children/'>[children]</a><br>
     <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a><br>
+    <a href='./education/'>[education]</a><br>
+    <a href='./learning_and_development/'>[learning_and_development]</a><br>
     <br>
     <br>
     
