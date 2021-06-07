@@ -162,6 +162,7 @@ echo "
     <a href='./questions/'>[questions]</a><br>
     <a href='./refference/'>[refference]</a><br>
     <a href='./voluntary_work/'>[voluntary_work]</a><br>
+    <a href='./work_experience/'>[work_experience]</a><br>
     <br>
     <br>
     
