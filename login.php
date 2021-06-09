@@ -14,5 +14,7 @@
             </form>
             <a href='./Register/'>REGISTER</a>
         </center>
+        
 
 <?php include('./Layout/footer.php');?>
+
