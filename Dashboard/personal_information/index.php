@@ -139,64 +139,10 @@ $stmt->bind_param("s", $_SESSION["uuid"]);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result(
-    $F_0,
-    $F_1,
-    $F_2,
-    $F_3,
-    $F_4,
-    $F_5,
-    $F_6,
-    $F_7,
-    $F_8,
-    $F_9,
-    $F_10,
-    $F_11,
-    $F_12,
-    $F_13,
-    $F_14,
-    $F_15,
-    $F_16,
-    $F_17,
-    $F_18,
-    $F_19,
-    $F_20,
-    $F_21,
-    $F_22,
-    $F_23,
-    $F_24,
-    $F_25,
-    $F_26,
-    $F_27,
-    $F_28,
-    $F_29,
-    $F_30,
-    $F_31,
-    $F_32,
-    $F_33,
-    $F_34,
-    $F_35,
-    $F_36,
-    $F_37,
-    $F_38,
-    $F_39,
-    $F_40,
-    $F_41,
-    $F_42,
-    $F_43,
-    $F_44,
-    $F_45,
-    $F_46,
-    $F_47,
-    $F_48,
-    $F_49,
-    $F_50,
-    $F_51,
-    $F_52,
-    $F_53,
-    $F_54,
-    $F_55,
-    $F_56
-);
+    $F_0, $F_1, $F_2, $F_3, $F_4, $F_5, $F_6, $F_7, $F_8, $F_9, $F_10, $F_11, $F_12, $F_13, $F_14, $F_15, $F_16, $F_17, $F_18, $F_19,
+    $F_20, $F_21, $F_22, $F_23, $F_24, $F_25, $F_26, $F_27, $F_28, $F_29, $F_30, $F_31, $F_32, $F_33, $F_34, $F_35, $F_36, $F_37, $F_38,
+    $F_39, $F_40, $F_41, $F_42, $F_43, $F_44, $F_45, $F_46, $F_47, $F_48, $F_49, $F_50, $F_51, $F_52, $F_53, $F_54, $F_55, $F_56
+); //Bruhhhh wtf! ur varaibles sux
 $stmt->fetch();
 
 if ($stmt->num_rows > 0) {
@@ -209,7 +155,6 @@ if(isset($_POST["SUBMIT"])){
     for ($i=0; $i < count($fields); $i++) { 
         $object["$sql_field_names[$i]"] = $_POST["field_$i"];
     }
-
     $response = onSubmit($conn, $query_type, "personal_information", $sql_field_names, $object, null);
 
     if($response["is_valid"]){
@@ -226,23 +171,23 @@ if(isset($_POST["SUBMIT"])){
 }
 
 ?>
-
+<!-- Start of Form View -->
 <form action='' method='POST'>
-
 <?php
-
 for ($i=0; $i < count($fields); $i++) { 
     eval('$value = $F_'.$i.';');
     echo ("
         <label for='field_$i'>$fields[$i]:</label><br>
         <input type='text' id='field_$i' value='$value' name='field_$i'><br>
     ");
-}
-
+} 
 ?>
 
 <input type='submit' name='SUBMIT' value='SUBMIT'>
 </form>
+
+<!-- end of form view -->
+<?php include('./persona_information_view.php');?>
 </center>
 
 <?php include('../../Layout/footer.php');?>

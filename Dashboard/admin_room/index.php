@@ -18,12 +18,10 @@ if(!$is_admin){
 
 $query = "SELECT uuid, first_name, middle_name, last_name FROM users WHERE is_admin=?";
 $data = array();
-
 $FNAME = false;
 $MNAME = false;
 $LNAME = false;
 $EMAIL = false;
-
 $should_be_admin = 0;
 array_push($data, $should_be_admin);
 
@@ -89,7 +87,6 @@ echo "
         </head>
         <body>
 ";
-
 if ($stmt->num_rows == 0) {
     if (!$FNAME && !$MNAME && !$LNAME && !$EMAIL) {
         echo "<h2>There are no users</h2>";
