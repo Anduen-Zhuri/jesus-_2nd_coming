@@ -47,7 +47,7 @@ $stmt_bind = $stmt->bind_param(str_repeat("s", count($request)), ...$array_value
 $stmt_exec = $stmt->execute();
 
 if ($stmt_exec === false || $stmt_bind === false || $stmt === false) {
-    array_push("* Database error, contact the administrator", $errors);
+    array_push($errors, "* Database error, contact the administrator");
 }
   
 }

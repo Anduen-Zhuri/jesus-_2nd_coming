@@ -12,7 +12,6 @@ if(!isset($_SESSION["uuid"])){
 <center>
 <?php
 
-
 $fields = array(
     "First name",
     "Middle name",
@@ -170,9 +169,35 @@ if(isset($_POST["SUBMIT"])){
     }
 }
 
+if(isset($_FILES['avatar'])){
+    $errors = array();
+    $file_name = $F_0."_".$F_1."_".$F_2.".png";
+    $file_size = $_FILES['avatar']['size'];
+    $file_tmp = $_FILES['avatar']['tmp_name'];
+    $file_type = $_FILES['avatar']['type'];
+    $file_ext = strtolower(end(explode('.',$_FILES['avatar']['name'])));
+    $extensions = array("jpeg","jpg","png");
+    $errors = array();
+    
+    if(in_array($file_ext,$extensions)=== false){
+       array_push($errors, "extension not allowed, please choose a JPEG or PNG file.");
+    }
+    
+    if($file_size > 5000000){
+        array_push($errors, 'File size must be excately 2 MB');
+    }
+    
+    if(empty($errors)==true){
+       move_uploaded_file($file_tmp,"../../Img/Users/".$file_name);
+       //echo "Success";
+    }else{
+       //print_r($errors);
+    }
+ }
+
 ?>
 <!-- Start of Form View -->
-<form action='' method='POST'>
+<form action='' method='POST' enctype="multipart/form-data">
 <?php
 for ($i=0; $i < count($fields); $i++) { 
     eval('$value = $F_'.$i.';');
@@ -183,6 +208,10 @@ for ($i=0; $i < count($fields); $i++) {
 } 
 ?>
 
+<br>
+<input type="file" name="avatar">
+<br>
+<br>
 <input type='submit' name='SUBMIT' value='SUBMIT'>
 </form>
 
@@ -190,4 +219,7 @@ for ($i=0; $i < count($fields); $i++) {
 <?php include('./persona_information_view.php');?>
 </center>
 
-<?php include('../../Layout/footer.php');?>
+<?php include('../../Layout/footer.php');
+
+
+?>
