@@ -11,7 +11,8 @@
                 <input type='password' id='Password' name='Password' autocomplete='cc-Password' class="form-control" placeholder="Password" style="margin-bottom: 2px;">
                 <input type='text' id='Birthday' name='Birthday' autocomplete='cc-Birthday' class="form-control" type="text" placeholder="Birth Date (mm/dd/yyyy)" style="margin-bottom: 2px;">
                 <input type='text' id='Birthplace' name='Birthplace' autocomplete='cc-Birthplace' class="form-control" type="text" placeholder="Birth Place" style="margin-bottom: 2px;">
-                <input type='submit' value='REGISTER' name='REGISTER' >
+                <input type='submit' value='REGISTER' name='REGISTER' class="btn btn-primary">
+               
             </form>
             <a href='../'>Back to login</a>
         </div>

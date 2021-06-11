@@ -19,13 +19,10 @@ if(isset($_POST["LOGIN"])){
 
      if(!$response["is_valid"]){
         $errors = $response["errors"];
-
          echo "<center>";
-
          for ($i=0; $i < count($errors); $i++) { 
              echo "$errors[$i]<br>";
          }
-
          echo "<center>";
      } else {
         $_SESSION["uuid"] = $response["uuid"];
