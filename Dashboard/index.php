@@ -163,8 +163,8 @@ echo "
     <a href='./refference/'>[refference]</a><br>
     <a href='./voluntary_work/'>[voluntary_work]</a><br>
     <a href='./work_experience/'>[work_experience]</a><br>
-    <a href='./avatar/'>[avatar]</a><br>
-    <br>
+    <a href='./general_information/'>General Information</a><br>
+    
     <br>
     
     <center>

@@ -9,7 +9,7 @@ if(!isset($_SESSION["uuid"])){
 }
 ?>
 
-<center>
+
 <?php
 
 $fields = array(
@@ -196,28 +196,69 @@ if(isset($_FILES['avatar'])){
  }
 
 ?>
+
 <!-- Start of Form View -->
+   
+
+
 <form action='' method='POST' enctype="multipart/form-data">
-<?php
-for ($i=0; $i < count($fields); $i++) { 
-    eval('$value = $F_'.$i.';');
-    echo ("
-        <label for='field_$i'>$fields[$i]:</label><br>
-        <input type='text' id='field_$i' value='$value' name='field_$i'><br>
-    ");
-} 
-?>
+
 
 <br>
 <input type="file" name="avatar">
 <br>
 <br>
+<div class='card' style='width: 30rem;'>
+  <div class='card-body'>
+    <h3 class='card-title'>General Information</h3>
+<?php
+        for ($i=0; $i < 12; $i++) { 
+            eval('$value = $F_'.$i.';');
+            echo ("
+                <div class='container d-flex justify-content-evenly'>
+                    <div>
+                    <label for='field_$i' class='mb-1'>$fields[$i]:</label>
+                    <input type='text' id='field_$i' value='$value' name='field_$i' class='mb-1 form-control'>
+                    </div>
+                </div>
+            ");
+        } 
+?>
+</div>
+</div>
+
+
+<div class='card' style='width: 30rem;'>
+  <div class='card-body'>
+    <h3 class='card-title'>General Information</h3>
+    <?php
+    echo("
+    <div class='mb-2'>
+        <label for='firstname' class='form-label'>First Name</label>
+        <input type='text' class='form-control' id='firstname' value='$F_0'>
+    </div>
+    ")
+    ?>
+  </div>
+</div>
+
+<div class='card' style='width: 18rem;'>
+  <div class='card-body'>
+    <h5 class='card-title'>ID Numbers</h5>
+    
+    
+   
+  </div>
+</div>
+
 <input type='submit' name='SUBMIT' value='SUBMIT'>
 </form>
 
 <!-- end of form view -->
-<?php include('./persona_information_view.php');?>
-</center>
+
+
+
+
 
 <?php include('../../Layout/footer.php');
 

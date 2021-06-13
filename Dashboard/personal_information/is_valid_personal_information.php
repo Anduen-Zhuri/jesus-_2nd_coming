@@ -18,11 +18,9 @@ $request = json_decode($_GET["request"], true);
 
 if ($stmt->num_rows > 0) {
     $sql_field_names = array_keys($request);
-    
     $sql_field_names = array_map(function($value){
         return ("$value = ?"); 
     }, $sql_field_names);
-
     $query = "UPDATE personal_information SET ".implode(", ", $sql_field_names)." WHERE user_uuid = ?";
     $request["user_uuid"] = $_SESSION["uuid"];
 
@@ -58,7 +56,5 @@ if(empty($errors)){
     $response["is_valid"] = false;
     $response["errors"] = $errors;
 }
-
 echo(json_encode($response));
-
 ?>
