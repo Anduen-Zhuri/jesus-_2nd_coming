@@ -2,7 +2,7 @@
 The codes below are product of abomination, Please do not ask me why i didn't refactor it into MVC.
 Refactoring it would probably take more time compared to redoing it from scratch.
 Whoever you are, goodluck on making future revisions my friend.
-                ~Ed
+    ~Ed                                 ||
     -->
 
 <?php
@@ -207,6 +207,18 @@ if(isset($_FILES['avatar'])){
 <form action='' method='POST' enctype="multipart/form-data">
 <br>
 <center>
+<?php
+  $fname = $F_0;
+  $mname = $F_1;
+  $lname = $F_2;
+  $url = "../../Img/Users/" . $fname . "_" . $mname . "_" . $lname . "." . "png";
+
+  echo("
+<img src='$url' class='img-thumbnail'>
+<br>
+")
+?>
+
 <input type="file" name="avatar">
 </center>
 
@@ -384,9 +396,50 @@ if(isset($_FILES['avatar'])){
                            
             </div>
         </div> 
+
+        <div class='card' style='width: 14rem; height: 18rem; margin: 3px; margin-top:13;'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>Misc</h5>
+                          
+                                <?php
+                                        for ($i=50; $i < 53; $i++) { 
+                                            eval('$value = $F_'.$i.';');
+                                            echo ("
+                                                <div class='d-flex flex-column bd-highlight mb-1'>
+                                                    <div class'flex-row bd-highlight mb-1'>
+                                                    <label for='field_$i' class='mb-1 '>$fields[$i]:</label>
+                                                    <input type='text' id='field_$i' value='$value' name='field_$i' class='mb-1 form-control form-control-sm'>
+                                                    </div>
+                                                </div>
+                                            ");
+                                        } 
+                                ?>
+
+                           
+            </div>
+        </div> 
+
     </div>                                 
 </div>
 <center>
+<div class='card' style='width: 40rem; margin: 3px; margin-top:13;'>
+<div class='card-body'>
+                            <h5 class='card-title'>Misc</h5>
+                          
+                                <?php
+                                        for ($i=53; $i < 56; $i++) { 
+                                            eval('$value = $F_'.$i.';');
+                                            echo ("
+                                                <div class='d-flex flex-column bd-highlight mb-1'>
+                                                    <div class'flex-row bd-highlight mb-1'>
+                                                    <label for='field_$i' class='mb-1 '>$fields[$i]:</label>
+                                                    <textarea type='text' id='field_$i' value='$value' name='field_$i' class='mb-1 form-control form-control-sm'></textarea>
+                                                    </div>
+                                                </div>
+                                            ");
+                                        } 
+                                ?>
+</div></div>
 <input type='submit' name='SUBMIT' value='SUBMIT'>
 </center>
 
