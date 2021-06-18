@@ -2,7 +2,7 @@
 The codes below are product of abomination, Please do not ask me why i didn't refactor it into MVC.
 Refactoring it would probably take more time compared to redoing it from scratch.
 Whoever you are, goodluck on making future revisions my friend.
-    ~Ed                                 ||
+    ~Ed
     -->
 
 <?php

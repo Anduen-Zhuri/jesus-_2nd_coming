@@ -162,13 +162,9 @@ echo "
     <a href='./questions/'>[questions]</a><br>
     <a href='./refference/'>[refference]</a><br>
     <a href='./voluntary_work/'>[voluntary_work]</a><br>
-    <a href='./work_experience/'>[work_experience]</a><br>
-    <a href='./general_information/'>General Information</a><br>
-    
+    <a href='./work_experience/'>[work_experience]</a><br>    
     <br>
-    
     <center>
-
     <form method='POST' action=''>
 <table>
     <tr>
@@ -193,11 +189,9 @@ echo "
         <td><center><textarea name='separation_date' rows='2' cols='10'></textarea></center></td>
         <td><center><textarea name='separation_cause' rows='2' cols='10'></textarea></center></td>
     </tr>
-
 </table>
 <input type='submit' value='INSERT NEW RECORD' name='INSERT'>
 </form>
-
 ";
 
 if ($stmt->num_rows <= 0) {
