@@ -131,149 +131,27 @@ if (isset($_POST["LOGOUT"])) {
 }
 
 echo "
-<html>
-    <head>
-        <title>Dashboard</title>
-        <meta name='viewport' content='width=device-width'>
-        <style>
-            td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-            tr:nth-child(even) td {
-                border-top-width: 0px;
-            }
-        </style>
-    </head>
-    <body>
     <h1>Hello $FNAME  $MNAME $LNAME</h1>
-    <a href='./edit_profile/'>[EDIT PROFILE]</a>
+    <a href='./edit_profile/'>User Profile</a>
     ";
     if ($is_admin) {
         echo ("<br><a href='./admin_room/'>[ADMIN ROOM]</a><br>");
     }
     echo"
-    <br><a href='./personal_information/'>[personal_information]</a><br>
+    <br><a href='./personal_information/'>General Information</a><br>
     <a href='./children/'>[children]</a><br>
     <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a><br>
     <a href='./education/'>[education]</a><br>
     <a href='./learning_and_development/'>[learning_and_development]</a><br>
     <a href='./questions/'>[questions]</a><br>
     <a href='./refference/'>[refference]</a><br>
-    <a href='./voluntary_work/'>[voluntary_work]</a><br>
-    <a href='./work_experience/'>[work_experience]</a><br>    
+    <a href='./voluntary_work/'>Voluntary Works</a><br>
+    <a href='./works/'>Work Experiences</a><br>    
     <br>
     <center>
-    <form method='POST' action=''>
-<table>
-    <tr>
-        <th><center>From<br>(mm/dd/yyyy)</center></th>
-        <th><center>To<br>(mm/dd/yyyy)</center></th>
-        <th><center>Designation</center></th>
-        <th><center>Status</center></th>
-        <th><center>Monthly salary</center></th>
-        <th><center>Assignment place</center></th>
-        <th><center>LAWOP</center></th>
-        <th><center>Separation date<br>(if any)</center></th>
-        <th><center>Separation clause<br>(if any)</center></th>
-    </tr>
-    <tr>
-        <td><center><textarea name='date_from' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='date_to' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='designation' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='status' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='monthly_salary' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='assignment_place' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='LAWOP' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='separation_date' rows='2' cols='10'></textarea></center></td>
-        <td><center><textarea name='separation_cause' rows='2' cols='10'></textarea></center></td>
-    </tr>
-</table>
-<input type='submit' value='INSERT NEW RECORD' name='INSERT'>
-</form>
 ";
 
-if ($stmt->num_rows <= 0) {
-    echo "<h2>Your records are empty</h2>";
-} else {
-    echo "<table>";
-        echo "
-        <tr>
-            <th>From</th>
-            <th>To</th>
-            <th>Designation</th>
-            <th>Status</th>
-            <th>Monthly salary</th>
-            <th>Assignment place</th>
-            <th>LAWOP</th>
-            <th>Separation date</th>
-            <th>Separation clause</th>
-            <th>Edit</th>
-            <th>Remove</th>
-        </tr>
-        ";
-        while ($stmt->fetch()) {
-            echo "
-            <tr>
-                <td>"; 
-                if(preg_match($date_format, $date_from)){
-                    echo $date_from;
-                } else {
-                    echo "<center>-</center>";
-                }
-                echo "
-                </td>
-                <td>";
-                if(preg_match($date_format, $date_to)){
-                    echo $date_to;
-                } else {
-                    echo "<center>-</center>";
-                }
-                echo"
-                </td>
-                <td>$designation</td>
-                <td>$status</td>
-                <td>$monthly_salary</td>
-                <td>$assignment_place</td>
-                <td>$LAWOP</td>
-                <td>";
-                if(!empty($separation_date) && preg_match($date_format, $separation_date)){
-                    echo $separation_date;
-                } else {
-                    echo "<center>-</center>";
-                }
-                echo"
-                </td>
-                <td>";
-                if(!empty($separation_cause)){
-                    echo $separation_cause;
-                } else {
-                    echo "<center>-</center>";
-                }
-                echo"
-                </td>
-                <td valign='center'><center>
-                    <a href='./edit_record/?id=$record_id'>
-                        <img src='../Img/edit.png' style='width: 2rem; height: 2rem;'>
-                    </a>
-                </center></td>
-                <td valign='center'><center>
-                    <a href='./remove_record/?id=$record_id'>
-                        <img src='../Img/remove.png' style='width: 2rem; height: 2rem;'>
-                    </a>
-                </center></td>
-            </tr>
-            ";
-        }
-   echo "</table>";
-}
-
 echo "
-<a href='./?sort=newest' style='margin-right: 1rem'>Sort by newest</a>
-<a href='./?sort=oldest' style='margin-left: 1rem'>Sort by oldest</a>
-<br>
-<br>
 <form action='' method='POST'>
 <input type='submit' name='LOGOUT' value='LOG OUT'>
 </form>

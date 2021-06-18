@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('../../Layout/header.php');
-include("../../styles/table_style/table_include.php");
 require_once("../../DB_CFG/index.php");
 require_once("../../Functions/SQL/sql_handler.php");
 
@@ -62,30 +61,35 @@ if(isset($_POST["REMOVE"])){
     }
 }?>
 
-
+<center>
 <form action='' method='POST'>
+<!-- -->
+<div class="bg-light col-sm-4 m-4">
+    <div class="form-group ">
+    <label for="exampleInputEmail1">Child's Name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name='field_0' placeholder="Child's Name">
+    <small id="emailHelp" class="form-text text-muted">Surname, First Name, Middle Name</small>
+    </div>
 
-<table style='width: fit-content'>
-    <tr>
-        <th>Child name</th>
-        <th>Child birthday</th>
-    </tr>
-    <tr>
-        <td><textarea name='field_0' rows='2' cols='10'></textarea></td>
-        <td><textarea name='field_1' rows='2' cols='10'></textarea></td>
-    </tr>
-</table>
-<input type='submit' name='INSERT' value='INSERT'><br>
+    <div class="form-group ">
+    <label for="exampleInputEmail1">Child Birth Date</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name='field_1' placeholder="Birth Date">
+    <small id="emailHelp" class="form-text text-muted">mm/dd/yyyy</small>
+    </div>
+  
+  
+<button type='submit' name='INSERT' class="btn btn-primary mt-1"> Insert </button><br>
+</div>
 </form>
 
+</center>
 <?php
-
 if ($stmt->num_rows <= 0) {
-    echo "<h3>You have no children this far</h3>";
+    echo "<center><h3>You have no children this far</h3></center>";
 } else {
-    echo "
+    echo ("
     <div class='limiter'>
-    <div class='container-table100'>
+    <div class='mt-5'>
         <div class='wrap-table100'>
             <div class='table100 ver1 m-b-110'>
                 <div class='table100-head'>
@@ -93,26 +97,32 @@ if ($stmt->num_rows <= 0) {
             <thead>
                 <tr class='row100 head'>
                     <th class='cell100 column1'>Child name</th>
-                    <th class='cell100 column2>Child birthday</th>
+                    <th class='cell100 column2'>Child birthday</th>
                     <th class='cell100 column3'>Remove</th>
                 </tr>
             </thead>
-    ";
+            </table>
+    </div>
+       
+    ");
 
 
     while ($stmt->fetch()) {
-        echo "
-            <tr>
-                <td>";
+        echo ("
+   <div class='table100-body js-pscroll'>
+	<table>
+        <tbody>
+            <tr class='row100 body'>
+                <td class='cell100 column1'>");
 
                     if (empty($F_0)){
                         echo "-";
                     } else {
                         echo $F_0;
                     }
-                    echo "
+        echo ("
                 </td>
-                <td>";
+                <td class='cell100 column2'>");
                 if (empty($F_1)){
                     echo "-";
                 } else {
@@ -121,11 +131,11 @@ if ($stmt->num_rows <= 0) {
                 
                 echo "
                 </td>
-                <td style='align-items: center;'>
+                <td class='cell100 column3'>
                     
                         <form action='' method='POST'>
                             <button type='submit' name='REMOVE' value='$child_id' style='
-                                background-color: transparent; border: 0px none; cursor: pointer;
+                            background-color: transparent; border: 0px none; cursor: pointer;
                             '>
                                 <img src='../../Img/remove.png' style='width: 2rem; height: 2rem;'>
                             </button>
@@ -133,11 +143,15 @@ if ($stmt->num_rows <= 0) {
                     
                 </td>
             </tr>
+            
         ";
     }
-    echo "</table> </div> </div> </div> </div></div>";
+    echo " </tbody>
+    </table></div> </div> </div> </div> </div>";
 }
 ?>
 
 
-<?php include('../../Layout/footer.php');?>
+<?php include('../../Layout/footer.php');
+      include("../../styles/table_style/table_include.php");
+    ?>
