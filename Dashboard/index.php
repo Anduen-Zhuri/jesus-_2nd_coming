@@ -1,7 +1,6 @@
 <?php
-
 session_start();
-
+include("../Layout/header.php");
 require_once("../DB_CFG/index.php");
 require_once("../Functions/is_valid_record.php");
 require_once("../Functions/Strings.php");
@@ -131,6 +130,7 @@ if (isset($_POST["LOGOUT"])) {
 }
 
 echo "
+<center>
     <h1>Hello $FNAME  $MNAME $LNAME</h1>
     <a href='./edit_profile/'>User Profile</a>
     ";
@@ -138,16 +138,36 @@ echo "
         echo ("<br><a href='./admin_room/'>[ADMIN ROOM]</a><br>");
     }
     echo"
-    <br><a href='./personal_information/'>General Information</a><br>
-    <a href='./children/'>[children]</a><br>
-    <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a><br>
-    <a href='./education/'>[education]</a><br>
-    <a href='./learning_and_development/'>[learning_and_development]</a><br>
-    <a href='./questions/'>[questions]</a><br>
-    <a href='./refference/'>[refference]</a><br>
-    <a href='./voluntary_work/'>Voluntary Works</a><br>
-    <a href='./works/'>Work Experiences</a><br>    
+    
+    <div class ='card'>
     <br>
+    <div class='card-body'>
+    <a href='./personal_information/'>General Information</a>
+    <br>
+
+    <a href='./children/'>[children]</a>
+    <br>
+
+    <a href='./civilservice_eligibility/'>[civilservice_eligibility]</a>
+    <br>
+
+    <a href='./education/'>[education]</a><br>
+    <a href='./learning_and_development/'>[learning_and_development]</a>
+    <br>
+
+    <a href='./refference/'>[refference]</a>
+    <br>
+
+    <a href='./voluntary_work/'>Voluntary Works</a>
+    <br>
+
+    <a href='./works/'>Work Experiences</a>
+    <br> 
+
+    </div>   
+    <br>
+    </center>
+    
     <center>
 ";
 
@@ -166,4 +186,5 @@ $stmt->close();
 } else {
     header("location: ../");
 }
+include("../Layout/footer.php");
 ?>
