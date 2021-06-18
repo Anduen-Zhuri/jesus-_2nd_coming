@@ -39,16 +39,12 @@ $stmt->bind_param("s", $_SESSION["uuid"]);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($F_0, $F_1, $F_2, $F_3, $F_4, $F_5, $F_6, $CS_ID);
-
 $query_type = "INSERT";
-
 if(isset($_POST["INSERT"])){
     for ($i=0; $i < count($fields); $i++) { 
         $object["$sql_field_names[$i]"] = $_POST["field_$i"];
     }
-
     $response = onSubmit($conn, $query_type, "civilservice_eligibility", $sql_field_names, $object, null);
-
     if($response["is_valid"]){
         header("Location: ./");
     } else {
@@ -64,9 +60,7 @@ if(isset($_POST["INSERT"])){
 
 if(isset($_POST["REMOVE"])){
     $id = $_POST["REMOVE"];
-
     $stmt = $conn->prepare("SELECT Cs_ID FROM civilservice_eligibility WHERE Cs_ID=? AND user_uuid=?") or die('prepare() failed: ' . htmlspecialchars($conn->error));
-
     $stmt->bind_param("ss", $id, $_SESSION["uuid"]);
     $stmt->execute();
     $stmt->store_result();

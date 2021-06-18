@@ -13,17 +13,15 @@ if (isset($_SESSION["uuid"]) && isset($_GET["id"]) && !empty($_GET["id"])) {
     $stmt->store_result();
     
     if ($stmt->num_rows <= 0) {
-        header("location: ../");
+        header("location: ../works");
     } else {
         $stmt = $conn->prepare("DELETE FROM jobs WHERE id = ?");
         $stmt->bind_param("i", $_GET["id"]);
         $stmt->execute();
         $stmt->close();
-
-        header("location: ../");
-
+        header("location: ../works");
     }
 
 } else {
-    header("location: ../");
+    header("location: ../works");
 }

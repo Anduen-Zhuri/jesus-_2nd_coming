@@ -25,7 +25,7 @@ $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows <= 0) {
-    header("location: ../");
+    header("location: ../works");
 }
 
 $stmt->bind_result($date_from, $date_to, $designation, $status, $monthly_salary, $assignment_place, $LAWOP, $separation_date, $separation_cause);
@@ -143,13 +143,13 @@ if(isset($_POST["UPDATE"])){
         $stmt->execute();
         $stmt->close();
 
-        header("location: ../");
+        header("location: ../works");
     }
 
 }
 
 } else {
-    header("location: ../");
+    header("location: ./");
 }
 
 ?>

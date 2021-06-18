@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include("../../Layout/header.php");
 require_once("../../DB_CFG/index.php");
 require_once("../../Functions/is_valid_record.php");
 require_once("../../Functions/Strings.php");
@@ -112,5 +112,5 @@ if (isset($_POST["UPDATE"])) {
 } else {
     header("location: ../");
 }
-
+include("../../Layout/footer.php");
 ?>
